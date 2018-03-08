@@ -17,7 +17,7 @@ class CreateCountriesTable extends Migration
             $table->increments('id');
             $table->string('iso',2);
             $table->string('country',45);
-            $table->boolean('archived');
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }

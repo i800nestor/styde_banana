@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitiesTableble extends Migration
+class CreateCurrenciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateCitiesTableble extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->increments('id');
-            $atble->int('state_id');
-            $table->string('city',45);
-            $table->boolean('capital');
-            $table->boolean('archived');
+            $table->string('isocode',3)->nullable();
+            $table->string('language',3);
+            $table->string('money',45);
+            $table->string('symbol',3);
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateCitiesTableble extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('cities');
+        Schema::dropIfExists('currencies');
     }
 }
