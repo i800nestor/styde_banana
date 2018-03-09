@@ -3,7 +3,7 @@
 @section('title', "Create Country")
 
 @section('content')
-	<h1>new</h1>
+	<h1>Create new country</h1>
 
 	@if ( $errors->any() )
 
@@ -25,6 +25,7 @@
 	<form method="POST" action="{{ url('countries/create') }}">
 		{{ csrf_field() }}
 
+		<label for="iso">Iso:</label>
 		<input type="text" name="iso" id="iso" placeholder="ve"
 		value="{{ old('iso') }}">
 

@@ -51,12 +51,21 @@ class CountryTest extends TestCase
     }
 
     /** @test */
+    public function itLoadstheNewCountryPage()
+    {
+        $this->get('countries/new')
+            ->assertStatus(200)
+            ->assertSee('Create new country');
+    }
+
+    /** @test */
     public function itDisplays404ErrorifTheCountryIsNotFound()
     {
-    	$this->get('countries/124214')
-    		->assertStatus(404)
-    		->assertSee('Page not found');
+        $this->get('countries/124214')
+            ->assertStatus(404)
+            ->assertSee('Page not found');
     }
+
 
     /** @test */
     public function itCreateNewCountry()
@@ -81,13 +90,25 @@ class CountryTest extends TestCase
             'iso' => 'ch',
             'country' => ''
         ])->assertRedirect( route('countries.new') )
-            ->assertSessionHasErrors([
-                'country' => 'The field is mandatory'
-            ]);
+            ->assertSessionHasErrors( ['country'] );
 
         $this->assertDatabaseMissing('countries', [
             'iso' => 'ch'
         ]);
+    }
+
+    /** @test */
+    public function theIsoIsRequired()
+    {
+
+        $this->from( route('countries.new') )
+            ->post('/countries/create', [
+            'iso' => '',
+            'country' => 'china'
+        ])->assertRedirect( route('countries.new') )
+            ->assertSessionHasErrors( ['iso']);
+
+        $this->assertEquals( 0, Country::count() );
     }
 
 }

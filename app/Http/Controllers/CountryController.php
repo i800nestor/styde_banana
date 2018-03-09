@@ -37,11 +37,14 @@ class CountryController extends Controller
         validar datos con el metodo validate
         */
     	$data = request()->validate([
-            'iso' => 'required',
-            'country' => 'required'
+            'iso' => 'required|max:2',
+            'country' => 'required|min:3|max:45'
         ], [
             'iso.required' => 'The field is mandatory',
-            'country.required' => 'The field is mandatory'
+            'iso.max' => 'This field maximum 2 characters',
+            'country.required' => 'The field is mandatory',
+            'country.max' => 'This field maximum 45 characters',
+            'country.min' => 'this field minimum 3 characters'
         ]);
 
     	Country::create([
