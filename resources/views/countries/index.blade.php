@@ -5,10 +5,19 @@
 @section('content')
 	<h1>Registered countries</h1>
 
+	<a href="{{ route('countries.new') }}">
+		create new country
+	</a>
+
 	<ul>
 		@forelse ($countries as $country)
 
-			<li>{{ $country->iso }}, {{ $country->country }}</li>
+			<li>
+				#{{ $country->id }} {{ $country->country }}, {{ $country->iso }}.
+				<a href="{{ route('countries.show', ['id' => $country->id]) }}">
+					See details
+				</a>
+			</li>
 
 		@empty
 
