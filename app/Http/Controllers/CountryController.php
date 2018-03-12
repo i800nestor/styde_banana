@@ -37,14 +37,15 @@ class CountryController extends Controller
         validar datos con el metodo validate
         */
     	$data = request()->validate([
-            'iso' => 'required|max:2',
-            'country' => 'required|min:3|max:45'
+            'iso' => 'required|max:2|unique:countries,iso',
+            'country' => 'required|min:3|max:45|unique:countries,country'
         ], [
             'iso.required' => 'The field is mandatory',
             'iso.max' => 'This field maximum 2 characters',
+            'iso.unique' => 'This iso is already registered',
             'country.required' => 'The field is mandatory',
             'country.max' => 'This field maximum 45 characters',
-            'country.min' => 'this field minimum 3 characters'
+            'country.min' => 'This field minimum 3 characters'
         ]);
 
     	Country::create([
@@ -53,5 +54,20 @@ class CountryController extends Controller
     	]);
 
     	return redirect()->route('countries.index');
+    }
+
+    public function edit(Country $country)
+    {
+        
+
+        return view('countries.edit', ['country' => $country]);
+
+    }
+
+    public function update(Country $country)
+    {
+        $country->update( request()->all() );
+
+        return redirect()->route('countries.show', ['country' => $country]);
     }
 }

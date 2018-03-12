@@ -45,7 +45,7 @@ class CountryTest extends TestCase
         	'country' => 'venezuela'
         ]);
 
-        $this->get('/countries/'.$country->id)
+        $this->get("/countries/{$country->id}")
             ->assertStatus(200)
             ->assertSee('venezuela');
     }
@@ -109,6 +109,45 @@ class CountryTest extends TestCase
             ->assertSessionHasErrors( ['iso']);
 
         $this->assertEquals( 0, Country::count() );
+    }
+
+    /** @test */
+    public function itLoadstheEditCountryPage()
+    {
+
+        $country = Country::create([
+            'iso' => 'ch',
+            'country' => 'china'
+        ]);
+
+        $this->get("countries/{$country->id}/edit")
+            ->assertStatus(200)
+            //si hay una vista llamada countries.edit
+            ->assertViewIs('countries.edit')
+            ->assertSee('Edit Country')
+            //si hay una variable llamada country
+            ->assertViewHas('country', function ($view_country) use ($country){
+                return $view_country->id == $country->id;
+            } );
+
+    }
+
+    /** @test */
+    public function itUpdateCountry()
+    {
+
+        $this->withoutExceptionHandling();
+
+        $country = country::create([
+            'iso' => 'ch',
+            'country' => 'china'
+        ]);
+
+        $this->put("countries/{$country->id}", [
+            'iso' => 'pn',
+            'country' => 'panama'
+        ])->assertRedirect( "/countries/{$country->id}" );
+
     }
 
 }

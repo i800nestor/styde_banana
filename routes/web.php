@@ -27,3 +27,8 @@ Route::get('/countries/new', 'CountryController@new')
 
 Route::post('/countries/create', 'CountryController@create')
 	->name('countries.create');
+
+Route::get('countries/{country}/edit', 'CountryController@edit')
+	->name('countries.edit');
+
+Route::put('/countries/{country}', 'CountryController@update');

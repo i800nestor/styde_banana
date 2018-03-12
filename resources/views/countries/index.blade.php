@@ -14,8 +14,8 @@
 
 			<li>
 				#{{ $country->id }} {{ $country->country }}, {{ $country->iso }}.
-				<a href="{{ route('countries.show', ['id' => $country->id]) }}">
-					See details
+				<a href="{{ route('countries.edit', ['id' => $country->id]) }}">
+					Edit
 				</a>
 			</li>
 
