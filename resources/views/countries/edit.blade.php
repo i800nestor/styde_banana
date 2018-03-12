@@ -20,7 +20,8 @@
 
 	@endif
 
-	<form method="POST" action="{{ url('countries/create') }}">
+	<form method="POST" action="{{ url("countries/{$country->id}") }}">
+		{{ method_field('PUT') }}
 		{{ csrf_field() }}
 
 		<label for="iso">Iso:</label>

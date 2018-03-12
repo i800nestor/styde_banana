@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Country;
+use Illuminate\Validation\Rule;
 
 class CountryController extends Controller
 {
@@ -40,12 +41,12 @@ class CountryController extends Controller
             'iso' => 'required|max:2|unique:countries,iso',
             'country' => 'required|min:3|max:45|unique:countries,country'
         ], [
-            'iso.required' => 'The field is mandatory',
-            'iso.max' => 'This field maximum 2 characters',
+            'iso.required' => 'The iso is mandatory',
+            'iso.max' => 'This iso maximum 2 characters',
             'iso.unique' => 'This iso is already registered',
-            'country.required' => 'The field is mandatory',
-            'country.max' => 'This field maximum 45 characters',
-            'country.min' => 'This field minimum 3 characters'
+            'country.required' => 'The country is mandatory',
+            'country.max' => 'This country maximum 45 characters',
+            'country.min' => 'This country minimum 3 characters'
         ]);
 
     	Country::create([
@@ -66,8 +67,31 @@ class CountryController extends Controller
 
     public function update(Country $country)
     {
-        $country->update( request()->all() );
+        $data = request()->validate([
+            'iso' => [
+                'required',
+                'min:2',
+                'max:45',
+                Rule::unique('countries')->ignore($country->id)
+            ],
+            'country' => [
+                'required',
+                'min:3',
+                'max:45',
+                Rule::unique('countries')->ignore($country->id)
+            ]
+        ], [
+            'iso.required' => 'The iso is mandatory',
+            'iso.max' => 'This iso maximum 2 characters',
+            'iso.unique' => 'This iso is already registered',
+            'country.required' => 'The field is mandatory',
+            'country.max' => 'This field maximum 45 characters',
+            'country.min' => 'This field minimum 3 characters',
+            'country.unique' => 'This country is already registered',
+        ]);
 
-        return redirect()->route('countries.show', ['country' => $country]);
+        $country->update($data);
+
+        return redirect()->route('countries.index');
     }
 }

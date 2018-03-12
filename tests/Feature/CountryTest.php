@@ -136,7 +136,7 @@ class CountryTest extends TestCase
     public function itUpdateCountry()
     {
 
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
         $country = country::create([
             'iso' => 'ch',
@@ -146,7 +146,55 @@ class CountryTest extends TestCase
         $this->put("countries/{$country->id}", [
             'iso' => 'pn',
             'country' => 'panama'
-        ])->assertRedirect( "/countries/{$country->id}" );
+        ])->assertRedirect( route('countries.index') );
+
+    }
+
+    /** @test */
+    public function theIsoUpdateIsRequired()
+    {
+        //$this->withoutExceptionHandling();
+
+        $country = country::create([
+            'iso' => 'ch',
+            'country' => 'china'
+        ]);
+
+        $this->from("countries/{$country->id}/edit")
+            ->put("countries/{$country->id}", [
+                'iso' => '',
+                'country' => 'panama'
+            ])
+            ->assertRedirect( "countries/{$country->id}/edit" )
+            ->assertSessionHasErrors( ['iso']);
+
+        $this->assertDatabaseMissing('countries', [
+            'country' => 'panama'
+        ]);
+
+    }
+
+    /** @test */
+    public function theCountryUpdateIsRequired()
+    {
+        //$this->withoutExceptionHandling();
+
+        $country = country::create([
+            'iso' => 'ch',
+            'country' => 'china'
+        ]);
+
+        $this->from("countries/{$country->id}/edit")
+            ->put("countries/{$country->id}", [
+                'iso' => 'pn',
+                'country' => ''
+            ])
+            ->assertRedirect( "countries/{$country->id}/edit" )
+            ->assertSessionHasErrors( ['country']);
+
+        $this->assertDatabaseMissing('countries', [
+            'iso' => 'pn'
+        ]);
 
     }
 
