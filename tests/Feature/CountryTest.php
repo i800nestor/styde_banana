@@ -151,6 +151,23 @@ class CountryTest extends TestCase
     }
 
     /** @test */
+    public function itArchived()
+    {
+        $this->withoutExceptionHandling();
+
+        $country = country::create([
+            'iso' => 'ch',
+            'country' => 'china',
+            'archive' => 0
+        ]);
+
+        $this->put("countries/{$country->id}/archived", [
+            'archived' => 1
+        ])->assertRedirect( route('countries.index') );
+
+    }
+
+    /** @test */
     public function theIsoUpdateIsRequired()
     {
         //$this->withoutExceptionHandling();

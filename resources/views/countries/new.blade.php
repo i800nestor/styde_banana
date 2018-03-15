@@ -3,55 +3,65 @@
 @section('title', "Create Country")
 
 @section('content')
-	<h1>Create new country</h1>
 
-	@if ( $errors->any() )
+	<div class="card">
 
-		<div class="alert alert-danger">
-			<p>please correct the errors</p>
-			{{--
-			<ul>
-				@foreach ($errors->all() as $error)
+		<h4 class="card-header">
+			Create new country
+		</h4>
 
-					<li>{{ $error }}</li>
+		<div class="card-body">
+			
+			@if ( $errors->any() )
 
-				@endforeach
-			</ul>
-			--}}
+			<div class="alert alert-danger">
+				<p>please correct the errors</p>
+				<ul>
+					@foreach ($errors->all() as $error)
+
+						<li>{{ $error }}</li>
+
+					@endforeach
+				</ul>
+			</div>
+
+			@endif
+
+			<form method="POST" action="{{ url('countries/create') }}">
+				{{ csrf_field() }}
+
+				<div class="input-group input-group-sm">
+				  
+				  <div class="input-group-prepend">
+				    <span class="input-group-text" id="inputGroup-sizing-sm">Iso</span>
+				  </div>
+
+				  <input type="text" name="iso" id="iso" placeholder="ve"
+				  value="{{ old('iso') }}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+				</div>
+				<br>
+
+				<div class="input-group input-group-sm">
+				  
+				  <div class="input-group-prepend">
+				    <span class="input-group-text" id="inputGroup-sizing-sm">Country</span>
+				  </div>
+
+				  <input type="text" name="country" id="country" placeholder="venezuela" value="{{ old('country') }}"
+				   class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+
+				</div>
+				<br>
+
+				<button type="submit" class="btn btn-primary">Create Country</button>
+				<a href="{{ route('countries.index') }}" class="btn btn-link">
+					Return to the list of countries
+				</a>
+			</form>
+
 		</div>
 
-	@endif
+	</div>
 
-	<form method="POST" action="{{ url('countries/create') }}">
-		{{ csrf_field() }}
-
-		<label for="iso">Iso:</label>
-		<input type="text" name="iso" id="iso" placeholder="ve"
-		value="{{ old('iso') }}">
-
-		@if ( $errors->has('iso') )
-
-			<p>{{ $errors->first('iso') }}</p>
-
-		@endif
-		<br>
-
-		<label for="country">Country:</label>
-		<input type="text" name="country" id="country" placeholder="venezuela" value="{{ old('country') }}">
-
-		@if ( $errors->has('country') )
-
-			<p>{{ $errors->first('country') }}</p>
-
-		@endif
-
-		<br>
-		<button type="submit">Create Country</button>
-	</form>
-
-	<p>
-		<a href="{{ route('countries.index') }}">
-			Return to the list of countries
-		</a>
-	</p>
 @endsection

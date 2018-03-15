@@ -90,10 +90,22 @@ class CountryController extends Controller
             'iso.required' => 'The iso is mandatory',
             'iso.max' => 'This iso maximum 2 characters',
             'iso.unique' => 'This iso is already registered',
-            'country.required' => 'The field is mandatory',
-            'country.max' => 'This field maximum 45 characters',
-            'country.min' => 'This field minimum 3 characters',
+            'country.required' => 'The country is mandatory',
+            'country.max' => 'This country maximum 45 characters',
+            'country.min' => 'This country minimum 3 characters',
             'country.unique' => 'This country is already registered',
+        ]);
+
+        $country->update($data);
+
+        return redirect()->route('countries.index');
+    }
+
+    public function archived(Country $country)
+    {
+        $data = request()->validate([
+            'iso' => '',
+            'country' => ''
         ]);
 
         $country->update($data);

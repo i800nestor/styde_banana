@@ -46,6 +46,14 @@
 						<td>{{ $country->country }}</td>
 						<td>{{ $country->archived }}</td>
 						<td>
+
+							<form action="{{ route('countries.archived', $country) }}" method="POST">
+								{{ csrf_field() }}
+								{{ method_field('PUT') }}
+
+								<button type="submit" class="btn btn-link">archived</button>
+							</form>
+
 							<form action="{{ route('countries.delete', $country) }}" method="POST">
 								{{ csrf_field() }}
 								{{ method_field('DELETE') }}
