@@ -12,8 +12,15 @@ class CountryController extends Controller
     {
     	$countries = Country::all();
 
+        if ( isset( $_GET['e'] ) && $_GET['e'] == 'true' ) {
+            
+            $error_message = 'The country you are trying to eliminate has associated states.';
+
+        }
+
     	return view('countries.index', compact(
-    		'countries'
+    		'countries',
+            'error_message'
     	));
     }
 
@@ -97,8 +104,16 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
 
-        $country->delete();
+        try {
+            
+            $country->delete();
 
-        return redirect()->route('countries.index');
+            return redirect()->route('countries.index');
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            
+            return redirect()->route('countries.index', ['e' => 'true']);
+
+        }
     }
 }
