@@ -198,4 +198,22 @@ class CountryTest extends TestCase
 
     }
 
+    /** @test */
+    public function itDeleteCountry()
+    {
+        $this->withoutExceptionHandling();
+
+        $country = country::create([
+            'iso' => 'ch',
+            'country' => 'china'
+        ]);
+
+        $this->delete("countries/{$country->id}")
+            ->assertRedirect('countries');
+
+        $this->assertDatabaseMissing('countries', [
+            'id' => $country->id
+        ]);
+    }
+
 }

@@ -33,3 +33,6 @@ Route::get('countries/{country}/edit', 'CountryController@edit')
 
 Route::put('/countries/{country}', 'CountryController@update')
 	->name('countries.update');
+
+Route::delete('/countries/{country}', 'CountryController@destroy')
+	->name('countries.delete');

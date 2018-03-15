@@ -14,9 +14,15 @@
 
 			<li>
 				#{{ $country->id }} {{ $country->country }}, {{ $country->iso }}.
-				<a href="{{ route('countries.edit', ['id' => $country->id]) }}">
-					Edit
-				</a>
+				<a href="{{ route('countries.edit', $country) }}">
+					Edit 
+				</a> |
+				<form action="{{ route('countries.delete', $country) }}" method="POST">
+					{{ csrf_field() }}
+					{{ method_field('DELETE') }}
+
+					<button type="submit">Delete</button>
+				</form>
 			</li>
 
 		@empty

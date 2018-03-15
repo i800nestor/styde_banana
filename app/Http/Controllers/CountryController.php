@@ -70,8 +70,7 @@ class CountryController extends Controller
         $data = request()->validate([
             'iso' => [
                 'required',
-                'min:2',
-                'max:45',
+                'max:2',
                 Rule::unique('countries')->ignore($country->id)
             ],
             'country' => [
@@ -91,6 +90,14 @@ class CountryController extends Controller
         ]);
 
         $country->update($data);
+
+        return redirect()->route('countries.index');
+    }
+
+    public function destroy(Country $country)
+    {
+
+        $country->delete();
 
         return redirect()->route('countries.index');
     }
