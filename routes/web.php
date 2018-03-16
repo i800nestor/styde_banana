@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+/*  Rutas de paises  */
+
 Route::get('/countries', 'CountryController@index')
 	->name('countries.index');
 
@@ -39,3 +41,14 @@ Route::put('countries/{country}/archived', 'CountryController@archived')
 
 Route::delete('/countries/{country}', 'CountryController@destroy')
 	->name('countries.delete');
+
+/*  Rutas de ciudades  */
+
+Route::get('cities', 'CityController@index')
+	->name('cities.index');
+
+Route::get('/cities/new', 'CityController@new')
+	->name('cities.new');
+
+Route::post('/cities/create', 'CityController@create')
+	->name('cities.create');

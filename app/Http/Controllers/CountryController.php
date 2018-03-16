@@ -104,7 +104,7 @@ class CountryController extends Controller
     public function archived(Country $country)
     {
         $data = request()->validate([
-            'archived' => ''
+            'archived' => 'required'
         ]);
 
         $country->update($data);

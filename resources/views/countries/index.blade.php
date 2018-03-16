@@ -24,6 +24,21 @@
 
 	@endif
 
+	@if ( $errors->any() )
+
+			<div class="alert alert-danger">
+				<p>please correct the errors</p>
+				<ul>
+					@foreach ($errors->all() as $error)
+
+						<li>{{ $error }}</li>
+
+					@endforeach
+				</ul>
+			</div>
+
+	@endif
+
 	@if ( $countries->isNotEmpty() )
 
 		<table class="table table-hover">
@@ -51,7 +66,7 @@
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
 								<input type="hidden" name="archived" id="archived" value=<?php
-									$archived = ( $country->archived == 0 ) ? True : False;
+									$archived = ( $country->archived == 0 ) ? 1 : 0;
 									echo $archived;
 								?>>
 
