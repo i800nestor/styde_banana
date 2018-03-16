@@ -1,13 +1,13 @@
 @extends('mother')
 
-@section('title', "Create City")
+@section('title', "Edit City")
 
 @section('content')
 
 	<div class="card">
 
 		<h4 class="card-header">
-			Create new city
+			Edit city
 		</h4>
 
 		<div class="card-body">
@@ -27,12 +27,15 @@
 
 			@endif
 
-			<form method="POST" action="{{ url('cities/create') }}">
+			<form method="POST" action="{{ url("cities/{$city->id}") }}">
 				{{ csrf_field() }}
+				{{ method_field('PUT') }}
 
 				<label for='state_id'>State</label>
 				<select name="state_id" id="state_id">
-					<option></option>
+					<option value="{{ $city->state_id }}">
+						{{ $state_reg->state }}
+					</option>
 
 					@foreach ($states as $state)
 
@@ -51,7 +54,7 @@
 				    <span class="input-group-text" id="inputGroup-sizing-sm">City</span>
 				  </div>
 
-				  <input type="text" name="city" id="city" placeholder="caracas" value="{{ old('city') }}"
+				  <input type="text" name="city" id="city" placeholder="caracas" value="{{ old('city', $city->city) }}"
 				   class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 
 				</div>
@@ -59,14 +62,27 @@
 
 				<p>capital</p>
 
-				<input type="radio" name="capital" id="capital_not" value=0 checked>
+				<input type="radio" name="capital" id="capital_not" value=0
+
+				@if ( !$city->capital )
+					{{ 'checked' }}
+				@endif
+
+				>
+
 				<label for="capital_not">Not</label>
 
-				<input type="radio" name="capital" id="capital_yes" value=1>
+				<input type="radio" name="capital" id="capital_yes" value=1
+
+				@if ( $city->capital )
+					{{ 'checked' }}
+				@endif
+
+				>
 				<label for="capital_yes">Yes</label>
 				<br>
 
-				<button type="submit" class="btn btn-primary">Create City</button>
+				<button type="submit" class="btn btn-primary">Edit City</button>
 				<a href="{{ route('cities.index') }}" class="btn btn-link">
 					Return to the list of cities
 				</a>

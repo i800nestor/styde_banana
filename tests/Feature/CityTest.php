@@ -139,4 +139,65 @@ class CityTest extends TestCase
             'city' => 'petare'
         ]);
     }
+
+    /** @test */
+    public function itLoadstheEditCityPage()
+    {
+    	Country::create([
+        	'iso' => 've',
+        	'country' => 'venezuela'
+        ]);
+
+    	State::create([
+        	'country_id' => 1,
+        	'state' => 'miranda',
+        	'iso' => 'mir'
+        ]);
+
+        $city = City::create([
+            'state_id' => 1,
+        	'city' => 'petare'
+        ]);
+
+        $this->get("cities/{$city->id}/edit")
+            ->assertStatus(200)
+            //si hay una vista llamada cities.edit
+            ->assertViewIs('cities.edit')
+            ->assertSee('Edit City')
+            //si hay una variable llamada city
+            ->assertViewHas('city', function ($view_city) use ($city){
+                return $view_city->id == $city->id;
+            } );
+
+    }
+
+    /** @test */
+    public function itUpdateCity()
+    {
+
+        //$this->withoutExceptionHandling();
+
+        Country::create([
+        	'iso' => 've',
+        	'country' => 'venezuela'
+        ]);
+
+    	State::create([
+        	'country_id' => 1,
+        	'state' => 'miranda',
+        	'iso' => 'mir'
+        ]);
+
+        $city = City::create([
+            'state_id' => 1,
+        	'city' => 'petare'
+        ]);
+
+        $this->put("cities/{$city->id}", [
+            'state_id' => 1,
+            'city' => 'antimano',
+            'capital' => 1
+        ])->assertRedirect( route('cities.index') );
+
+    }
 }

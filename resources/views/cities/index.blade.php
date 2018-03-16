@@ -54,7 +54,16 @@
 						<td>{{ $city->capital }}</td>
 						<td>{{ $city->archived }}</td>
 						<td>
+							<form action="" method="POST">
+								{{ csrf_field() }}
+								{{ method_field('DELETE') }}
 
+								<a href="{{ route('cities.edit', $city) }}" class="btn btn-link">
+									<span class="oi oi-pencil"></span>
+								</a>
+
+								<button type="submit" class="btn btn-link"><span class="oi oi-trash"></span></button>
+							</form>
 						</td>
 					</tr>
 

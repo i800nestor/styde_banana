@@ -1,6 +1,6 @@
 @extends('mother')
 
-@section('title', "Create Country")
+@section('title', "Edit Country")
 
 @section('content')
 

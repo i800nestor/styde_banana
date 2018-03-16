@@ -52,3 +52,9 @@ Route::get('/cities/new', 'CityController@new')
 
 Route::post('/cities/create', 'CityController@create')
 	->name('cities.create');
+
+Route::get('cities/{city}/edit', 'CityController@edit')
+	->name('cities.edit');
+
+Route::put('/cities/{city}', 'CityController@update')
+	->name('cities.update');

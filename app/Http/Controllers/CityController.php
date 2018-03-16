@@ -41,6 +41,49 @@ class CityController extends Controller
     	$data = request()->validate([
             'state_id' => 'required|min:1',
             'city' => 'required|min:3|max:45',
+            'capital' => 'required'
+        ], [
+            'state_id.required' => 'Select a state',
+            'state_id.min' => 'Select a state',
+            'capital.required' => 'Select, whether it is a capital or not',
+            'city.required' => 'The city is mandatory',
+            'city.max' => 'This city maximum 45 characters',
+            'city.min' => 'This city minimum 3 characters'
+        ]);
+
+    	City::create([
+    		'state_id' => $data['state_id'],
+        	'city' => $data['city'],
+        	'capital' => $data['capital']
+    	]);
+
+    	return redirect()->route('cities.index');
+    }
+
+    public function edit(City $city)
+    {
+    	$states = DB::table('states')
+    		->select('id', 'state')
+    		->get();
+
+    	$state_reg = DB::table('states')
+    		->select('state')
+    		->where('id', '=', $city->state_id)
+    		->first();
+        
+        return view('cities.edit', [
+        	'city' => $city,
+        	'states' => $states,
+        	'state_reg' => $state_reg
+        ] );
+
+    }
+
+    public function update(City $city)
+    {
+        $data = request()->validate([
+            'state_id' => 'required|min:1',
+            'city' => 'required|min:3|max:45',
             'capital' => ''
         ], [
             'state_id.required' => 'Select a state',
@@ -50,18 +93,8 @@ class CityController extends Controller
             'city.min' => 'This city minimum 3 characters'
         ]);
 
-        if ( !isset($data['capital']) ) {
-        	
-        	$data['capital'] = 0;
+        $city->update($data);
 
-        }
-
-    	City::create([
-    		'state_id' => $data['state_id'],
-        	'city' => $data['city'],
-        	'capital' => $data['capital']
-    	]);
-
-    	return redirect()->route('cities.index');
+        return redirect()->route('cities.index');
     }
 }
