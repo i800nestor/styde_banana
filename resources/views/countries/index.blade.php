@@ -50,6 +50,10 @@
 							<form action="{{ route('countries.archived', $country) }}" method="POST">
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
+								<input type="hidden" name="archived" id="archived" value=<?php
+									$archived = ( $country->archived == 0 ) ? True : False;
+									echo $archived;
+								?>>
 
 								<button type="submit" class="btn btn-link">archived</button>
 							</form>

@@ -104,8 +104,7 @@ class CountryController extends Controller
     public function archived(Country $country)
     {
         $data = request()->validate([
-            'iso' => '',
-            'country' => ''
+            'archived' => ''
         ]);
 
         $country->update($data);

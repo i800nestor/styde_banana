@@ -153,12 +153,12 @@ class CountryTest extends TestCase
     /** @test */
     public function itArchived()
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
         $country = country::create([
             'iso' => 'ch',
             'country' => 'china',
-            'archive' => 0
+            'archived' => 0
         ]);
 
         $this->put("countries/{$country->id}/archived", [
