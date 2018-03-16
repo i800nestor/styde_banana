@@ -39,11 +39,12 @@ class CityController extends Controller
         validar datos con el metodo validate
         */
     	$data = request()->validate([
-            'state_id' => 'required',
+            'state_id' => 'required|min:1',
             'city' => 'required|min:3|max:45',
             'capital' => ''
         ], [
-            'state_id.required' => 'The state is mandatory',
+            'state_id.required' => 'Select a state',
+            'state_id.min' => 'Select a state',
             'city.required' => 'The city is mandatory',
             'city.max' => 'This city maximum 45 characters',
             'city.min' => 'This city minimum 3 characters'

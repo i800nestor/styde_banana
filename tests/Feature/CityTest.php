@@ -87,4 +87,56 @@ class CityTest extends TestCase
         	'city' => 'caracas'
     	]);
     }
+
+    /** @test */
+    public function theCityIsRequired()
+    {
+    	Country::create([
+        	'iso' => 've',
+        	'country' => 'venezuela'
+        ]);
+
+    	State::create([
+        	'country_id' => 1,
+        	'state' => 'miranda',
+        	'iso' => 'mir'
+        ]);
+
+        $this->from( route('cities.new') )
+            ->post('/cities/create', [
+            'state_id' => 1,
+        	'city' => ''
+        ])->assertRedirect( route('cities.new') )
+            ->assertSessionHasErrors( ['city'] );
+
+        $this->assertDatabaseMissing('cities', [
+            'state_id' => 1
+        ]);
+    }
+
+    /** @test */
+    public function theStateIdIsRequired()
+    {
+    	Country::create([
+        	'iso' => 've',
+        	'country' => 'venezuela'
+        ]);
+
+    	State::create([
+        	'country_id' => 1,
+        	'state' => 'miranda',
+        	'iso' => 'mir'
+        ]);
+
+        $this->from( route('cities.new') )
+            ->post('/cities/create', [
+            'state_id' => '',
+        	'city' => 'petare'
+        ])->assertRedirect( route('cities.new') )
+            ->assertSessionHasErrors( ['state_id'] );
+
+        $this->assertDatabaseMissing('cities', [
+            'city' => 'petare'
+        ]);
+    }
 }

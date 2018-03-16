@@ -32,7 +32,7 @@
 
 				<label for='state_id'>State</label>
 				<select name="state_id" id="state_id">
-					<option>Select</option>
+					<option></option>
 
 					@foreach ($states as $state)
 
