@@ -15,7 +15,6 @@
 
 	</div>
 
-	
 	@if ( isset($error_message) && $_GET['e'] == 'true' )
 
 		<div class="alert alert-danger">

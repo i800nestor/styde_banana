@@ -58,3 +58,9 @@ Route::get('cities/{city}/edit', 'CityController@edit')
 
 Route::put('/cities/{city}', 'CityController@update')
 	->name('cities.update');
+
+Route::put('cities/{city}/archived', 'CityController@archived')
+	->name('cities.archived');
+
+Route::delete('/cities/{city}', 'CityController@destroy')
+	->name('cities.delete');

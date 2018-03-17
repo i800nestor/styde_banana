@@ -151,7 +151,7 @@ class CountryTest extends TestCase
     }
 
     /** @test */
-    public function itArchived()
+    public function itArchivedCountry()
     {
         //$this->withoutExceptionHandling();
 

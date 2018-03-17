@@ -200,4 +200,133 @@ class CityTest extends TestCase
         ])->assertRedirect( route('cities.index') );
 
     }
+
+    /** @test */
+    public function itArchivedCity()
+    {
+        //$this->withoutExceptionHandling();
+
+        Country::create([
+            'iso' => 've',
+            'country' => 'venezuela'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'state' => 'miranda',
+            'iso' => 'mir'
+        ]);
+
+        $city = City::create([
+            'state_id' => 1,
+            'city' => 'petare',
+            'archived' => 0
+        ]);
+
+        $this->put("cities/{$city->id}/archived", [
+            'archived' => 1
+        ])->assertRedirect( route('cities.index') );
+
+    }
+
+    /** @test */
+    public function theCityUpdateIsRequired()
+    {
+        Country::create([
+            'iso' => 've',
+            'country' => 'venezuela'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'state' => 'miranda',
+            'iso' => 'mir'
+        ]);
+
+        $city = City::create([
+            'state_id' => 1,
+            'city' => 'petare',
+        ]);
+
+        $this->from( "cities/{$city->id}/edit" )
+            ->put("/cities/{$city->id}", [
+            'state_id' => 1,
+            'city' => '',
+            'capital' => 1
+        ])->assertRedirect( "cities/{$city->id}/edit" )
+            ->assertSessionHasErrors( ['city'] );
+
+        $this->assertDatabaseMissing('cities', [
+            'capital' => 1
+        ]);
+    }
+
+    /** @test */
+    public function theStateIdUpdateIsRequired()
+    {
+        //$this->withoutExceptionHandling();
+
+        Country::create([
+            'iso' => 've',
+            'country' => 'venezuela'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'state' => 'miranda',
+            'iso' => 'mir'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'state' => 'bolivar',
+            'iso' => 'bo'
+        ]);
+
+        $city = City::create([
+            'state_id' => 1,
+            'city' => 'petare',
+        ]);
+
+        $this->from( "cities/{$city->id}/edit" )
+            ->put("/cities/{$city->id}", [
+            'state_id' => '',
+            'city' => 'upata',
+            'capital' => 1
+        ])->assertRedirect( "cities/{$city->id}/edit" )
+            ->assertSessionHasErrors( ['state_id'] );
+
+        $this->assertDatabaseMissing('cities', [
+            'city' => 'upata'
+        ]);
+    }
+
+    /** @test */
+    public function itDeleteCity()
+    {
+        $this->withoutExceptionHandling();
+
+        Country::create([
+            'iso' => 've',
+            'country' => 'venezuela'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'state' => 'miranda',
+            'iso' => 'mir'
+        ]);
+
+        $city = City::create([
+            'state_id' => 1,
+            'city' => 'petare',
+        ]);
+
+        $this->delete("cities/{$city->id}")
+            ->assertRedirect('cities');
+
+        $this->assertDatabaseMissing('cities', [
+            'id' => $city->id
+        ]);
+    }
 }

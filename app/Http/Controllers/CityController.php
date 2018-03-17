@@ -97,4 +97,31 @@ class CityController extends Controller
 
         return redirect()->route('cities.index');
     }
+
+    public function archived(City $city)
+    {
+        $data = request()->validate([
+            'archived' => 'required'
+        ]);
+
+        $city->update($data);
+
+        return redirect()->route('cities.index');
+    }
+
+    public function destroy(City $city)
+    {
+
+        try {
+            
+            $city->delete();
+
+            return redirect()->route('cities.index');
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            
+            return redirect()->route('cities.index', ['e' => 'true']);
+
+        }
+    }
 }

@@ -15,6 +15,14 @@
 
 	</div>
 
+	@if ( isset($error_message) && $_GET['e'] == 'true' )
+
+		<div class="alert alert-danger">
+			<p>{{ $error_message }}</p>
+		</div>
+
+	@endif
+
 	@if ( $errors->any() )
 
 			<div class="alert alert-danger">
@@ -54,7 +62,19 @@
 						<td>{{ $city->capital }}</td>
 						<td>{{ $city->archived }}</td>
 						<td>
-							<form action="" method="POST">
+
+							<form action="{{ route('cities.archived', $city) }}" method="POST">
+								{{ csrf_field() }}
+								{{ method_field('PUT') }}
+								<input type="hidden" name="archived" id="archived" value=<?php
+									$archived = ( $city->archived == 0 ) ? 1 : 0;
+									echo $archived;
+								?>>
+
+								<button type="submit" class="btn btn-link">archived</button>
+							</form>
+
+							<form action="{{ route('cities.delete', $city) }}" method="POST">
 								{{ csrf_field() }}
 								{{ method_field('DELETE') }}
 
