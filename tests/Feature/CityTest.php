@@ -304,7 +304,7 @@ class CityTest extends TestCase
     /** @test */
     public function itDeleteCity()
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
         Country::create([
             'iso' => 've',

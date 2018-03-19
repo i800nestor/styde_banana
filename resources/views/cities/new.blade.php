@@ -33,9 +33,10 @@
 				<label for='state_id'>State</label>
 				<select name="state_id" id="state_id">
 
+					<?php $find = false ?>
+					
 					@foreach ($states as $state)
 
-						<?php $find = false ?>
 
 						@if ( old('state_id') == $state->id )
 
