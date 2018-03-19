@@ -65,7 +65,7 @@
 				<input type="radio" name="capital" id="capital_not" value=0
 
 				@if ( !$city->capital )
-					{{ 'checked' }}
+					checked
 				@endif
 
 				>
@@ -75,7 +75,7 @@
 				<input type="radio" name="capital" id="capital_yes" value=1
 
 				@if ( $city->capital )
-					{{ 'checked' }}
+					checked
 				@endif
 
 				>

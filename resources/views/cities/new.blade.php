@@ -32,7 +32,30 @@
 
 				<label for='state_id'>State</label>
 				<select name="state_id" id="state_id">
-					<option></option>
+
+					@foreach ($states as $state)
+
+						<?php $find = false ?>
+
+						@if ( old('state_id') == $state->id )
+
+							<option value="{{ old('state_id')}}" >
+								{{ $state->state }}
+							</option>
+
+							<?php $find = true ?>
+
+							@break
+
+						@endif
+
+					@endforeach
+
+					@if (!$find)
+
+						<option></option>
+
+					@endif
 
 					@foreach ($states as $state)
 
@@ -59,10 +82,23 @@
 
 				<p>capital</p>
 
-				<input type="radio" name="capital" id="capital_not" value=0 checked>
+				<input type="radio" name="capital" id="capital_not" value=0 
+
+				@if ( !old('capital', 0) )
+					checked 
+				@endif
+
+				>
+
 				<label for="capital_not">Not</label>
 
-				<input type="radio" name="capital" id="capital_yes" value=1>
+				<input type="radio" name="capital" id="capital_yes" value=1 
+
+				@if ( old('capital') )
+					checked 
+				@endif
+
+				>
 				<label for="capital_yes">Yes</label>
 				<br>
 
