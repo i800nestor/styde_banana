@@ -42,6 +42,29 @@ Route::put('countries/{country}/archived', 'CountryController@archived')
 Route::delete('/countries/{country}', 'CountryController@destroy')
 	->name('countries.delete');
 
+/*  Rutas de estados  */
+
+Route::get('states', 'StateController@index')
+	->name('states.index');
+
+Route::get('/states/new', 'StateController@new')
+	->name('states.new');
+
+Route::post('/states/create', 'StateController@create')
+	->name('states.create');
+
+Route::get('states/{state}/edit', 'StateController@edit')
+	->name('states.edit');
+
+Route::put('/states/{state}', 'StateController@update')
+	->name('states.update');
+
+Route::put('states/{state}/archived', 'StateController@archived')
+	->name('states.archived');
+
+Route::delete('/states/{state}', 'StateController@destroy')
+	->name('states.delete');
+
 /*  Rutas de ciudades  */
 
 Route::get('cities', 'CityController@index')

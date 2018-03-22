@@ -33,9 +33,31 @@
 
 				<label for='state_id'>State</label>
 				<select name="state_id" id="state_id">
-					<option value="{{ $city->state_id }}">
-						{{ $state_reg->state }}
-					</option>
+					
+					<?php $find = false ?>
+					
+					@foreach ($states as $state)
+
+
+						@if ( old('state_id', $city->state_id) == $state->id )
+
+							<option value="{{ old('state_id', $city->state_id)}}" >
+								{{ $state->state }}
+							</option>
+
+							<?php $find = true ?>
+
+							@break
+
+						@endif
+
+					@endforeach
+
+					@if (!$find)
+
+						<option></option>
+
+					@endif
 
 					@foreach ($states as $state)
 
