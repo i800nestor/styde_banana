@@ -84,7 +84,7 @@
 
                 <div class="links">
                     <a href="{{ route('countries.index') }}">Countries</a>
-                    {{--<a href="{{ route('states.index') }}">States</a>--}}
+                    <a href="{{ route('states.index') }}">States</a>
                     <a href="{{ route('cities.index') }}">Cities</a>
                 </div>
             </div>
