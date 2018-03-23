@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
     		'countries',
     		'cities',
     		'states',
-    		'currencies'
+    		'currencies',
+            'paymentterms',
+            'termtypes'
     	]);
 
         // $this->call(UsersTableSeeder::class);
@@ -24,6 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(StatesSeeder::class);
         $this->call(CitiesSeeder::class);
         $this->call(CurrenciesSeeder::class);
+        $this->call(PaymentTermsSeeder::class);
+        $this->call(TermTypesSeeder::class);
     }
 
     protected function truncateTables(array $tables){
