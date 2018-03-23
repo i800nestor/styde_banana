@@ -89,6 +89,7 @@
 
 			</tbody>
 		</table>
+		{{ $countries->links() }}
 
 	@else
 

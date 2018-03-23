@@ -10,7 +10,7 @@ class CountryController extends Controller
 {
     public function index()
     {
-    	$countries = Country::orderBy('country')->get();
+    	$countries = Country::orderBy('country')->paginate(4);
 
         if ( isset( $_GET['e'] ) && $_GET['e'] == 'true' ) {
             
