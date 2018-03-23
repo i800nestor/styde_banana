@@ -38,7 +38,7 @@
 
 	@endif
 
-	@if ( count($cities) )
+	@if ( $cities->isNotEmpty() )
 
 		<table class="table table-hover">
 			<thead>
@@ -91,6 +91,7 @@
 
 			</tbody>
 		</table>
+		{{ $cities->links() }}
 
 	@else
 

@@ -11,12 +11,12 @@ class StateController extends Controller
 {
     public function index()
     {
-    	$states = DB::select('
-            SELECT states.id, countries.country, states.iso, states.state, states.archived
-            FROM countries, states
-            WHERE countries.id = states.country_id
-            ORDER BY countries.country, states.state;
-        ');
+    	$states = DB::table('states')
+            ->select('states.id', 'countries.country', 'states.iso', 'states.state', 'states.archived')
+            ->join('countries', 'states.country_id', '=', 'countries.id')
+            ->orderBy('countries.country', 'ASC', 'states.state', 'ASC')
+            ->paginate(4)
+            ;
 
     	if ( isset( $_GET['e'] ) && $_GET['e'] == 'true' ) {
             
