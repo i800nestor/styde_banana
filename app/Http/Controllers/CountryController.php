@@ -10,7 +10,7 @@ class CountryController extends Controller
 {
     public function index()
     {
-    	$countries = Country::all();
+    	$countries = Country::orderBy('country')->get();
 
         if ( isset( $_GET['e'] ) && $_GET['e'] == 'true' ) {
             

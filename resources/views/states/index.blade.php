@@ -38,13 +38,13 @@
 
 	@endif
 
-	@if ( $states->isNotEmpty() )
+	@if ( count($states) )
 
 		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th scope="col"># State</th>
-					<th scope="col"># Country</th>
+					<th scope="col">Country</th>
 					<th scope="col">Iso</th>
 					<th scope="col">State</th>
 					<th scope="col">Archived</th>
@@ -57,13 +57,13 @@
 
 					<tr>
 						<th scope="row">{{ $state->id }}</th>
-						<td>{{ $state->country_id }}</td>
+						<td>{{ $state->country }}</td>
 						<td>{{ $state->iso }}</td>
 						<td>{{ $state->state }}</td>
 						<td>{{ $state->archived }}</td>
 						<td>
 
-							<form action="{{ route('states.archived', $state) }}" method="POST">
+							<form action="{{ route('states.archived', $state->id) }}" method="POST">
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
 								<input type="hidden" name="archived" id="archived" value=<?php
@@ -74,11 +74,11 @@
 								<button type="submit" class="btn btn-link">archived</button>
 							</form>
 
-							<form action="{{ route('states.delete', $state) }}" method="POST">
+							<form action="{{ route('states.delete', $state->id) }}" method="POST">
 								{{ csrf_field() }}
 								{{ method_field('DELETE') }}
 
-								<a href="{{ route('states.edit', $state) }}" class="btn btn-link">
+								<a href="{{ route('states.edit', $state->id) }}" class="btn btn-link">
 									<span class="oi oi-pencil"></span>
 								</a>
 

@@ -11,7 +11,12 @@ class CityController extends Controller
 {
     public function index()
     {
-    	$cities = City::all();
+    	$cities = DB::select('
+            SELECT cities.id, states.state, cities.city, cities.capital, cities.archived
+            FROM states, cities
+            WHERE states.id = cities.state_id
+            ORDER BY states.state, cities.city;
+        ');
 
     	return view('cities.index', compact(
     		'cities'
@@ -26,6 +31,7 @@ class CityController extends Controller
 
     	$states = DB::table('states')
     		->select('id', 'state')
+            ->orderBy('state')
     		->get();
     	
     	return view( 'cities.new', compact('states') );

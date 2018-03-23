@@ -11,7 +11,12 @@ class StateController extends Controller
 {
     public function index()
     {
-    	$states = State::all();
+    	$states = DB::select('
+            SELECT states.id, countries.country, states.iso, states.state, states.archived
+            FROM countries, states
+            WHERE countries.id = states.country_id
+            ORDER BY countries.country, states.state;
+        ');
 
     	if ( isset( $_GET['e'] ) && $_GET['e'] == 'true' ) {
             
@@ -33,6 +38,7 @@ class StateController extends Controller
 
     	$countries = DB::table('countries')
     		->select('id', 'country')
+            ->orderBy('country')
     		->get();
     	
     	return view( 'states.new', compact('countries') );
