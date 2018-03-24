@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
     		'cities',
     		'states',
     		'currencies',
-            'paymentterms',
-            'termtypes'
+            'payment_terms',
+            'term_types'
     	]);
 
         // $this->call(UsersTableSeeder::class);

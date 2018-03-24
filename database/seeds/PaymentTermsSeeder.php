@@ -14,15 +14,18 @@ class PaymentTermsSeeder extends Seeder
     public function run()
     {
         PaymentTerm::create([
-        	'name' => 'balance 30 dias.'
+        	'name' => 'balance 30D',
+            'notes' => 'Pago total de la factura en 30 dias'
         ]);
 
         PaymentTerm::create([
-        	'name' => '50 por ciento 30 dias 50 por ciento 60 dias.'
+        	'name' => '50-50 30-60D',
+            'notes' => '50 por ciento 30 dias 50 por ciento 60 dias'
         ]);
 
         PaymentTerm::create([
-        	'name' => 'monto fijo 30 dias'
+        	'name' => 'Monto fijo 100M 30D',
+            'notes' => 'Pago de 100 millones en 30 dias'
         ]);
     }
 }

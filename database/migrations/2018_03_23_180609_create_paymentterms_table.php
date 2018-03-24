@@ -13,7 +13,7 @@ class CreatePaymenttermsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paymentterms', function (Blueprint $table) {
+        Schema::create('payment_terms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 45);
             $table->text('notes')->nullable();
@@ -28,6 +28,6 @@ class CreatePaymenttermsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paymentterms');
+        Schema::dropIfExists('payment_terms');
     }
 }

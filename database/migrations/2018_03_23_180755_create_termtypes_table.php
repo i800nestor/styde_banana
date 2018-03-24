@@ -13,11 +13,11 @@ class CreateTermtypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('termtypes', function (Blueprint $table) {
+        Schema::create('term_types', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('paymentterms_id');
-            $table->foreign('paymentterms_id')->references('id')->on('paymentterms');
+            $table->unsignedInteger('payment_terms_id');
+            $table->foreign('payment_terms_id')->references('id')->on('payment_terms');
             /*
                 Tipo de termino:
 
@@ -25,34 +25,35 @@ class CreateTermtypesTable extends Migration
                 P = Percentage (porcentaje especifico)
                 M = Fixed Mount (un monto fijo)
             */
-            $table->string('type', 1);
+            $table->char('type', 1);
             /*
                 Dias para el vencimiento
             */
-            $table->integer('day');
+            $table->integer('day')->default(0);
             /*
                 Type Invoice Datye - significa vencimiento fecha factura
             */
-            $table->boolean('typeid')->nullable();
+            $table->boolean('typeid')->default(0);
             /*
                 Last day of current month - Vencimiento el ultimo del mes de la factura
             */
-            $table->boolean('typeem')->nullable();
+            $table->boolean('typeem')->default(0);
             /*
                 Last day of next month - Venciemiento el ultimo del mes del mes siguiente la factura
             */
-            $table->boolean('typenm')->nullable();
+            $table->boolean('typenm')->default(0);
             /*
                 dia de descuento pronto pago
             */
-            $table->integer('dayDxpp')->nullable();
+            $table->integer('daydxpp')->nullable();
             /*
                 porcentaje de descuento pronto pago
             */
-            $table->integer('percentDxpp')->nullable();
+            $table->integer('percentdxpp')->nullable();
 
-            $table->double('fixedamount', 10, 2)->nullable();
-            $table->double('percentage', 3, 2)->nullable();
+            $table->double('fixed_amount', 12, 2)->nullable();
+            $table->double('percentage', 5, 2)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -63,6 +64,6 @@ class CreateTermtypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('termtypes');
+        Schema::dropIfExists('term_types');
     }
 }
