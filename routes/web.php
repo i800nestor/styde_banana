@@ -87,3 +87,27 @@ Route::put('cities/{city}/archived', 'CityController@archived')
 
 Route::delete('/cities/{city}', 'CityController@destroy')
 	->name('cities.delete');
+
+/*  Rutas  de metodos de pagos  */
+
+Route::get('payment_terms', 'PaymentTermController@index')
+	->name('payment_terms.index');
+
+Route::get('/payment_terms/{payment_term}', 'PaymentTermController@show')
+	->where('payment_term', '[0-9]+')
+	->name('payment_terms.show');
+
+Route::get('/payment_terms/new', 'PaymentTermController@new')
+	->name('payment_terms.new');
+
+Route::post('/payment_terms/create', 'PaymentTermController@create')
+	->name('payment_terms.create');
+
+Route::get('payment_terms/{payment_term}/edit', 'PaymentTermController@edit')
+	->name('payment_terms.edit');
+
+Route::put('/payment_terms/{payment_term}', 'PaymentTermController@update')
+	->name('payment_terms.update');
+
+Route::delete('/payment_terms/{payment_term}', 'PaymentTermController@destroy')
+	->name('payment_terms.delete');
