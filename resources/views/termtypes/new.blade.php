@@ -14,6 +14,23 @@
 		</div>
 	</div>
 
+	@if ( $errors->any() )
+
+		<div class="alert alert-danger">
+			<p>please correct the errors</p>
+			<ul>
+
+				@foreach ($errors->all() as $error)
+
+					<li>{{ $error }}</li>
+
+				@endforeach
+
+			</ul>
+		</div>
+
+	@endif
+
 	<h4 class="card-header">
 		Create term type
 	</h4>
@@ -31,49 +48,35 @@
 							<td>
 								<select name="type" id="type">
 
-									<option value="P">Fixed amount</option>
+									<option value="M">Fixed amount</option>
 									<option value="B">Balance of the invoice</option>
-									<option value="M">Specific percentage</option>
+									<option value="P">Specific percentage</option>
 
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td>Days</td>
-							<td>
-								<input type="number" name="day" id="day" value="{{ old('day') }}">
-							</td>							
 						</tr>
 						<tr>
 							<td>
 								Type expiration
 							</td>
 							<td>
-								<input type="radio" name="typev" id="typeid" value=1>
+								<input type="radio" name="typev" id="typeid" value=typeid>
 								<label for="typeid">Type Invoice Date</label>
 							</td>
 							<td>
-								<input type="radio" name="typev" id="typeem" value=1>
+								<input type="radio" name="typev" id="typeem" value=typeem>
 								<label for="typeem">Last day month</label>
 							</td>
 							<td>
-								<input type="radio" name="typev" id="typenm" value=1>
+								<input type="radio" name="typev" id="typenm" value=typenm>
 								<label for="typenm">Last day next month</label>
 							</td>							
 						</tr>
 						<tr>
+							<td>Days</td>
 							<td>
-								days for early payment
-							</td>
-							<td>
-								<input type="number" name="daydxpp" id="daydxpp" value="{{ old('daydxpp') }}">
-							</td>
-							<td>
-								discount for prompt payment
-							</td>
-							<td>
-								<input type="number" name="percentdxpp" id="percentdxpp" value="{{ old('percentdxpp') }}">
-							</td>
+								<input type="number" name="day" id="day" value="{{ old('day') }}">
+							</td>							
 						</tr>
 						<tr>
 							<td>
@@ -89,6 +92,20 @@
 							</td>
 							<td>
 								<input type="number" name="percentage" id="percentage" value="{{ old('percentage') }}">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								days for early payment
+							</td>
+							<td>
+								<input type="number" name="daydxpp" id="daydxpp" value="{{ old('daydxpp') }}">
+							</td>
+							<td>
+								discount for prompt payment
+							</td>
+							<td>
+								<input type="number" name="percentdxpp" id="percentdxpp" value="{{ old('percentdxpp') }}">
 							</td>
 						</tr>
 						<tr>
