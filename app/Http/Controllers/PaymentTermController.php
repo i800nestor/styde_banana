@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PaymentTerm;
+use App\TermType;
 use Illuminate\Validation\Rule;
 
 class PaymentTermController extends Controller
@@ -26,8 +27,11 @@ class PaymentTermController extends Controller
 
     public function show(PaymentTerm $payment_term)
     {
+        $term_type = TermType::where('payment_terms_id', '=', $payment_term->id)
+            ->orderBy('id')
+            ->get();
 
-    	return view('paymentterms.show', compact('payment_term'));
+    	return view('paymentterms.show', compact('payment_term', 'term_type'));
 
     }
 

@@ -31,7 +31,7 @@ class CreateTermtypesTable extends Migration
             */
             $table->integer('day')->default(0);
             /*
-                Type Invoice Datye - significa vencimiento fecha factura
+                Type Invoice Date - significa vencimiento fecha factura
             */
             $table->boolean('typeid')->default(0);
             /*
@@ -45,14 +45,14 @@ class CreateTermtypesTable extends Migration
             /*
                 dia de descuento pronto pago
             */
-            $table->integer('daydxpp')->nullable();
+            $table->integer('daydxpp')->default(0);
             /*
                 porcentaje de descuento pronto pago
             */
-            $table->integer('percentdxpp')->nullable();
+            $table->integer('percentdxpp')->default(0);
 
-            $table->double('fixed_amount', 12, 2)->nullable();
-            $table->double('percentage', 5, 2)->nullable();
+            $table->double('fixed_amount', 12, 2)->default(0);
+            $table->double('percentage', 5, 2)->default(0);
             $table->timestamps();
         });
     }

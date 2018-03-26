@@ -86,6 +86,7 @@
                     <a href="{{ route('countries.index') }}">Countries</a>
                     <a href="{{ route('states.index') }}">States</a>
                     <a href="{{ route('cities.index') }}">Cities</a>
+                    <a href="{{ route('payment_terms.index') }}">payment terms</a>
                 </div>
             </div>
         </div>
