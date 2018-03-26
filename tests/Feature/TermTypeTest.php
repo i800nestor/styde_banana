@@ -15,7 +15,7 @@ class TermTypeTest extends TestCase
     /** @test */
     public function showTermType()
     {
-    	$this->withoutExceptionHandling();
+    	//$this->withoutExceptionHandling();
     	
     	$payment_term = PaymentTerm::create([
     		'name' => 'unique pay 30D'
@@ -35,5 +35,32 @@ class TermTypeTest extends TestCase
     		->assertStatus(200)
     		->assertSee('30');
 
+    }
+
+    /** @test */
+    function isNotTermType(){
+
+        $payment_term = PaymentTerm::create([
+    		'name' => 'unique pay 30D'
+    	]);
+
+        $this->get("/payment_terms/{$payment_term->id}")
+            //Comprobamos que carga correctamente
+            ->assertStatus(200)
+            ->assertSee('No Terms Types registered.');
+    }
+
+    /** @test */
+    public function itLoadstheNewTermTypePage()
+    {
+    	$this->withoutExceptionHandling();
+
+    	$payment_term = PaymentTerm::create([
+    		'name' => 'unique pay 30D'
+    	]);
+
+        $this->get("term_types/{$payment_term->id}/new")
+            ->assertStatus(200)
+            ->assertSee('Create term type');
     }
 }
