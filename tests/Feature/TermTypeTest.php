@@ -75,19 +75,19 @@ class TermTypeTest extends TestCase
 
         $this->post('/term_types/create', [
             'payment_terms_id' => 1,
-            'type' => 'B',
-            'day' => 30,
+            'type' => 'M',
+            'day' => 0,
             'typeid' => 0,
             'typeem' => 0,
             'typenm' => 0,
-            'fixed_amount' => 0,
-            'percentage' => 100,
+            'fixed_amount' => 1500000,
+            'percentage' => 0,
             'daydxpp' => 0,
             'percentdxpp' => 0
         ])->assertRedirect( route('payment_terms.show', 1) );
 
         $this->assertDatabaseHas('term_types',[
-            'type' => 'B'
+            'type' => 'M'
         ]);
     }
 }

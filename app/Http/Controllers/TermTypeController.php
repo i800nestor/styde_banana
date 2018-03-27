@@ -57,6 +57,24 @@ class TermTypeController extends Controller
             $data['typeem'] = 0;
             $data['typenm'] = 0;
 
+        }   elseif ( $data['typev'] == 'typeid' ) {
+
+            $data['typeid'] = 1;
+            $data['typeem'] = 0;
+            $data['typenm'] = 0;
+
+        }   elseif ( $data['typev'] == 'typeem' ) {
+
+            $data['typeid'] = 0;
+            $data['typeem'] = 1;
+            $data['typenm'] = 0;
+
+        }   elseif ( $data['typev'] == 'typenm' ) {
+
+            $data['typeid'] = 0;
+            $data['typeem'] = 0;
+            $data['typenm'] = 1;
+
         }
 
     	$term_type = TermType::create([
