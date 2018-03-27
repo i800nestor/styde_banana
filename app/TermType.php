@@ -14,9 +14,9 @@ class TermType extends Model
     	'typeid',
     	'typeem',
     	'typenm',
-    	'daydxpp',
-    	'percentdxpp',
-    	'percentdxpp',
-    	'percentage'
+        'fixed_amount',
+        'percentage',
+        'daydxpp',
+        'percentdxpp'
     ];
 }

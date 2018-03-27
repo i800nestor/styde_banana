@@ -45,14 +45,14 @@ class CreateTermtypesTable extends Migration
             /*
                 dia de descuento pronto pago
             */
-            $table->integer('daydxpp')->default(0);
+            $table->integer('daydxpp')->nullable();
             /*
                 porcentaje de descuento pronto pago
             */
-            $table->integer('percentdxpp')->default(0);
+            $table->integer('percentdxpp')->nullable();
 
-            $table->double('fixed_amount', 12, 2)->default(0);
-            $table->double('percentage', 5, 2)->default(0);
+            $table->double('fixed_amount', 12, 2)->nullable();
+            $table->double('percentage', 5, 2)->nullable();
             $table->timestamps();
         });
     }

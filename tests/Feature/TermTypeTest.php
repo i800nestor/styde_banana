@@ -63,4 +63,31 @@ class TermTypeTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Create term type');
     }
+
+    /** @test */
+    public function itCreateNewTermType()
+    {
+        $this->withoutExceptionHandling();
+
+        $payment_term = PaymentTerm::create([
+            'name' => 'unique pay 30D'
+        ]);
+
+        $this->post('/term_types/create', [
+            'payment_terms_id' => 1,
+            'type' => 'B',
+            'day' => 30,
+            'typeid' => 0,
+            'typeem' => 0,
+            'typenm' => 0,
+            'fixed_amount' => 0,
+            'percentage' => 100,
+            'daydxpp' => 0,
+            'percentdxpp' => 0
+        ])->assertRedirect( route('payment_terms.show', 1) );
+
+        $this->assertDatabaseHas('term_types',[
+            'type' => 'B'
+        ]);
+    }
 }

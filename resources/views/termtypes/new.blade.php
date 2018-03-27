@@ -49,8 +49,8 @@
 								<select name="type" id="type">
 
 									<option value="M">Fixed amount</option>
-									<option value="B">Balance of the invoice</option>
-									<option value="P">Specific percentage</option>
+									<option value="B">Balance</option>
+									<option value="P">Percentage</option>
 
 								</select>
 							</td>
