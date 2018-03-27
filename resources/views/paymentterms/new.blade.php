@@ -44,7 +44,7 @@
 
 				<div class="form-group">
 				    <label for="notes">Notes</label>
-				    <textarea class="form-control" name="notes" id="notes" placeholder="Payment method notes" value="{{ old('notes') }}" rows="3"></textarea>
+				    <textarea class="form-control" name="notes" id="notes" placeholder="Payment method notes"  rows="3">{{ old('notes') }}</textarea>
   				</div>
 
 				<br>

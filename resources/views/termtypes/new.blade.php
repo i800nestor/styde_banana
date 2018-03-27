@@ -48,6 +48,7 @@
 							<td>
 								<select name="type" id="type">
 
+									<option value="{{ old('type') }}">{{ old('type') }}</option>
 									<option value="M">Fixed amount</option>
 									<option value="B">Balance</option>
 									<option value="P">Percentage</option>

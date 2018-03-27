@@ -29,7 +29,7 @@ class CreateTermtypesTable extends Migration
             /*
                 Dias para el vencimiento
             */
-            $table->integer('day')->default(0);
+            $table->integer('day')->nullable();
             /*
                 Type Invoice Date - significa vencimiento fecha factura
             */

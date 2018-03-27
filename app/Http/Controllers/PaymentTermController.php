@@ -54,7 +54,7 @@ class PaymentTermController extends Controller
         ], [
         	'name.required' => 'The name is mandatory',
             'name.max' => 'This name maximum 45 characters',
-            'name.min' => 'This name minimum 3 characters'
+            'name.min' => 'This name minimum 5 characters'
         ]);
 
     	PaymentTerm::create([
@@ -80,7 +80,7 @@ class PaymentTermController extends Controller
         ], [
         	'name.required' => 'The name is mandatory',
             'name.max' => 'This name maximum 45 characters',
-            'name.min' => 'This name minimum 3 characters'
+            'name.min' => 'This name minimum 5 characters'
         ]);
 
         $payment_term->update($data);
