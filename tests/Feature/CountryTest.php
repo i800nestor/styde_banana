@@ -66,7 +66,6 @@ class CountryTest extends TestCase
             ->assertSee('Page not found');
     }
 
-
     /** @test */
     public function itCreateNewCountry()
     {

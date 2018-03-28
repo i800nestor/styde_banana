@@ -128,3 +128,26 @@ Route::put('/term_types/{term_type}', 'TermTypeController@update')
 
 Route::delete('/term_types/{term_type}', 'TermTypeController@destroy')
 	->name('term_types.delete');
+
+/*  Rutas de unidades  */
+
+Route::get('/units', 'UnitController@index')
+	->name('units.index');
+
+Route::get('/units/new', 'UnitController@new')
+	->name('units.new');
+
+Route::post('/units/create', 'UnitController@create')
+	->name('units.create');
+
+Route::get('units/{unit}/edit', 'UnitController@edit')
+	->name('units.edit');
+
+Route::put('/units/{unit}', 'UnitController@update')
+	->name('units.update');
+
+Route::put('units/{unit}/archived', 'UnitController@archived')
+	->name('units.archived');
+
+Route::delete('/units/{unit}', 'UnitController@destroy')
+	->name('units.delete');

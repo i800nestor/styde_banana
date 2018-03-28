@@ -87,6 +87,7 @@
                     <a href="{{ route('states.index') }}">States</a>
                     <a href="{{ route('cities.index') }}">Cities</a>
                     <a href="{{ route('payment_terms.index') }}">payment terms</a>
+                    <a href="{{ route('units.index') }}">Units</a>
                 </div>
             </div>
         </div>
