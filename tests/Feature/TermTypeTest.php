@@ -159,4 +159,35 @@ class TermTypeTest extends TestCase
         ])->assertRedirect( route('payment_terms.show', 1) );
 
     }
+
+    /** @test */
+    public function itDeleteTermType()
+    {
+        $this->withoutExceptionHandling();
+
+        $payment_term = PaymentTerm::create([
+            'name' => 'unique pay 30D',
+            'notes' => 'Pay unique in 30 days'
+        ]);
+
+        $term_type = TermType::create([
+            'payment_terms_id' => 1,
+            'type' => 'B',
+            'day' => 0,
+            'typev' => 'typeid',
+            'fixed_amount' => 0,
+            'percentage' => 0,
+            'daydxpp' => 0,
+            'percentdxpp' => 0
+        ]);
+
+        $this->delete("term_types/{$term_type->id}")
+            ->assertRedirect( route('payment_terms.show', $term_type->payment_terms_id) );
+
+        $this->assertDatabaseMissing('term_types', [
+            'id' => 1,
+            'type' => 'B'
+        ]);
+
+    }
 }

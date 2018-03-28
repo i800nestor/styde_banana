@@ -125,3 +125,6 @@ Route::get('term_types/{payment_term}/{term_type}/edit', 'TermTypeController@edi
 
 Route::put('/term_types/{term_type}', 'TermTypeController@update')
 	->name('term_types.update');
+
+Route::delete('/term_types/{term_type}', 'TermTypeController@destroy')
+	->name('term_types.delete');

@@ -51,7 +51,7 @@
 						<td>{{ number_format($term->fixed_amount, 2, '.', ',') }}</td>
 						<td>{{ $term->percentage }}%</td>
 						<td>
-							<form action="" method="POST">
+							<form action="{{ url("term_types/{$term->id}") }}" method="POST">
 								{{ csrf_field() }}
 								{{ method_field('DELETE') }}
 
@@ -68,6 +68,7 @@
 
 			</tbody>
 		</table>
+		{{ $term_type->links() }}
 
 	@else
 

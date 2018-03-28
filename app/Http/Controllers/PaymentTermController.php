@@ -29,10 +29,9 @@ class PaymentTermController extends Controller
     {
         $term_type = TermType::where('payment_terms_id', '=', $payment_term->id)
             ->orderBy('id')
-            ->get();
+            ->paginate(4);
 
     	return view('paymentterms.show', compact('payment_term', 'term_type'));
-
     }
 
     public function new()

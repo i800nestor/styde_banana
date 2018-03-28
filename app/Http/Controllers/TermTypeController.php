@@ -12,9 +12,7 @@ class TermTypeController extends Controller
 {
     public function new(PaymentTerm $payment_term)
     {
-        	
-    	return view('termtypes.new', compact('payment_term'));
-
+        return view('termtypes.new', compact('payment_term'));
     }
 
     public function create()
@@ -154,5 +152,13 @@ class TermTypeController extends Controller
         $term_type->update($data);
 
         return redirect()->route('payment_terms.show', $term_type->payment_terms_id);
+    }
+
+    public function destroy(TermType $term_type)
+    {
+        $term_type->delete();
+
+        return redirect()->route('payment_terms.show', $term_type->payment_terms_id);
+
     }
 }
