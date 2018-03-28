@@ -5,9 +5,8 @@
 @section('content')
 
 	<div class="card bg-light mb-3" style="max-width: 18rem;">
-		<div class="card-header">Payment Term</div>
+		<div class="card-header">{{ $payment_term->name }}</div>
 		<div class="card-body">
-			<h5 class="card-title">{{ $payment_term->name }}</h5>
 	 		<p class="card-text">
 	 			{{ $payment_term->notes }}
 	 		</p>
@@ -34,6 +33,7 @@
 				    <th scope="col">Discount percentage</th>
 				    <th scope="col">Fixed amount</th>
 				    <th scope="col">Percentage</th>
+				    <th scope="col">Action</th>
 		 		</tr>
 			</thead>
 			<tbody>
@@ -50,6 +50,18 @@
 						<td>{{ $term->percentdxpp }}</td>
 						<td>{{ number_format($term->fixed_amount, 2, '.', ',') }}</td>
 						<td>{{ $term->percentage }}%</td>
+						<td>
+							<form action="" method="POST">
+								{{ csrf_field() }}
+								{{ method_field('DELETE') }}
+
+								<a href="{{ url("term_types/{$payment_term->id}/{$term->id}/edit") }}" class="btn btn-link">
+									<span class="oi oi-pencil"></span>
+								</a>
+
+								<button type="submit" class="btn btn-link"><span class="oi oi-trash"></span></button>
+							</form>
+						</td>
 					</tr>
 
 				@endforeach

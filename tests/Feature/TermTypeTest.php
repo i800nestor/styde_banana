@@ -90,4 +90,73 @@ class TermTypeTest extends TestCase
             'type' => 'M'
         ]);
     }
+
+    /** @test */
+    public function itLoadstheEditTermType()
+    {
+
+        $payment_term = PaymentTerm::create([
+            'name' => 'unique pay 30D',
+            'notes' => 'Pay unique in 30 days'
+        ]);
+
+        $term_type = TermType::create([
+            'payment_terms_id' => 1,
+            'type' => 'M',
+            'day' => 0,
+            'typeid' => 0,
+            'typeem' => 0,
+            'typenm' => 0,
+            'fixed_amount' => 1500000,
+            'percentage' => 0,
+            'daydxpp' => 0,
+            'percentdxpp' => 0
+        ]);
+
+        $this->get("term_types/{$payment_term->id}/{$term_type->id}/edit")
+            ->assertStatus(200)
+            ->assertViewIs('termtypes.edit')
+            ->assertSee('Edit Term Type')
+            ->assertViewHas('term_type', function ($view_term_type) use ($term_type){
+                return $view_term_type->id == $term_type->id;
+            } );
+
+    }
+
+    /** @test */
+    public function itUpdateTermType()
+    {
+
+        $this->withoutExceptionHandling();
+
+        $payment_term = PaymentTerm::create([
+            'name' => 'unique pay 30D',
+            'notes' => 'Pay unique in 30 days'
+        ]);
+
+        $term_type = TermType::create([
+            'payment_terms_id' => 1,
+            'type' => 'M',
+            'day' => 0,
+            'typeid' => 0,
+            'typeem' => 0,
+            'typenm' => 0,
+            'fixed_amount' => 1500000,
+            'percentage' => 0,
+            'daydxpp' => 0,
+            'percentdxpp' => 0
+        ]);
+
+        $this->put("term_types/{$term_type->id}", [
+            'payment_terms_id' => 1,
+            'type' => 'B',
+            'day' => 0,
+            'typev' => 'typeid',
+            'fixed_amount' => 0,
+            'percentage' => 0,
+            'daydxpp' => 0,
+            'percentdxpp' => 0
+        ])->assertRedirect( route('payment_terms.show', 1) );
+
+    }
 }

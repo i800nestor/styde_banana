@@ -119,3 +119,9 @@ Route::get('/term_types/{payment_term}/new', 'TermTypeController@new')
 
 Route::post('/term_types/create', 'TermTypeController@create')
 	->name('term_types.create');
+
+Route::get('term_types/{payment_term}/{term_type}/edit', 'TermTypeController@edit')
+	->name('term_types.edit');
+
+Route::put('/term_types/{term_type}', 'TermTypeController@update')
+	->name('term_types.update');

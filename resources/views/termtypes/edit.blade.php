@@ -1,6 +1,6 @@
 @extends('mother')
 
-@section('title', "New Term Type - {$payment_term->name}")
+@section('title', "Edit Term Type - {$payment_term->name}")
 
 @section('content')
 
@@ -31,15 +31,17 @@
 	@endif
 
 	<h4 class="card-header">
-		Create term type
+		Edit Term Type
 	</h4>
 
 		<div class="table-responsive">
 			<table class="table">
 				<tbody>
 
-					<form method="POST" action="{{ url('term_types/create') }}">
+					<form method="POST" action="{{ url("term_types/{$term_type->id}") }}">
 						{{ csrf_field() }}
+						{{ method_field('PUT') }}
+
 						<input type="hidden" name="payment_terms_id" id="payment_terms_id" value="{{ $payment_term->id }}">
 
 						<tr>
@@ -47,7 +49,7 @@
 							<td>
 								<select name="type" id="type">
 
-									<option value="{{ old('type') }}">{{ old('type') }}</option>
+									<option value="{{ old('type', $term_type->type) }}">{{ old('type', $term_type->type) }}</option>
 									<option value="M">Fixed amount</option>
 									<option value="B">Balance</option>
 									<option value="P">Percentage</option>
@@ -63,20 +65,38 @@
 								<input type="radio" name="typev" id="typedays" value="typedays" checked>
 								<label for="typedays">Days</label>
 								<br>
-								<input type="radio" name="typev" id="typeid" value=typeid>
+								<input type="radio" name="typev" id="typeid" value=typeid
+								
+								@if ( $term_type->typeid == 1 )
+									checked 
+								@endif
+
+								>
 								<label for="typeid">Type-ID</label>
 								<br>
-								<input type="radio" name="typev" id="typeem" value=typeem>
+								<input type="radio" name="typev" id="typeem" value=typeem
+								
+								@if ( $term_type->typeem == 1 )
+									checked 
+								@endif
+								
+								>
 								<label for="typeem">Type-EM</label>
 								<br>
-								<input type="radio" name="typev" id="typenm" value=typenm>
+								<input type="radio" name="typev" id="typenm" value=typenm
+								
+								@if ( $term_type->typenm == 1 )
+									checked 
+								@endif
+								
+								>
 								<label for="typenm">Type-NM</label>
 							</td>							
 						</tr>
 						<tr>
 							<td>Days</td>
 							<td>
-								<input type="number" name="day" id="day" value="{{ old('day') }}">
+								<input type="number" name="day" id="day" value="{{ old('day', $term_type->day) }}">
 							</td>							
 						</tr>
 						<tr>
@@ -84,7 +104,7 @@
 								Fixed amount
 							</td>
 							<td>
-								<input type="number" name="fixed_amount" id="fixed_amount" value="{{ old('fixed_amount') }}">
+								<input type="number" name="fixed_amount" id="fixed_amount" value="{{ old('fixed_amount', $term_type->fixed_amount) }}">
 							</td>
 						</tr>
 						<tr>
@@ -92,7 +112,7 @@
 								Percentage
 							</td>
 							<td>
-								<input type="number" name="percentage" id="percentage" value="{{ old('percentage') }}">
+								<input type="number" name="percentage" id="percentage" value="{{ old('percentage', $term_type->percentage) }}">
 							</td>
 						</tr>
 						<tr>
@@ -100,18 +120,18 @@
 								days for early payment
 							</td>
 							<td>
-								<input type="number" name="daydxpp" id="daydxpp" value="{{ old('daydxpp') }}">
+								<input type="number" name="daydxpp" id="daydxpp" value="{{ old('daydxpp', $term_type->daydxpp) }}">
 							</td>
 							<td>
 								discount for prompt payment
 							</td>
 							<td>
-								<input type="number" name="percentdxpp" id="percentdxpp" value="{{ old('percentdxpp') }}">
+								<input type="number" name="percentdxpp" id="percentdxpp" value="{{ old('percentdxpp', $term_type->percentdxpp) }}">
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<button type="submit" class="btn btn-primary">Create Term Type</button>
+								<button type="submit" class="btn btn-primary">Edit Term Type</button>
 							</td>
 						</tr>
 
