@@ -21,14 +21,14 @@
 
 	@if ( $term_type->isNotEmpty() )
 
-		<table class="table">
+		<table class="table table-sm">
 			<thead>
 		 		<tr>
 				    <th scope="col">Type</th>
 				    <th scope="col">Days</th>
 				    <th scope="col">invoice date</th>
-				    <th scope="col">the last day of month</th>
-				    <th scope="col">the last day of next month</th>
+				    <th scope="col">Last month</th>
+				    <th scope="col">Last next month</th>
 				    <th scope="col">Discount days</th>
 				    <th scope="col">Discount percentage</th>
 				    <th scope="col">Fixed amount</th>
@@ -59,7 +59,9 @@
 									<span class="oi oi-pencil"></span>
 								</a>
 
-								<button type="submit" class="btn btn-link"><span class="oi oi-trash"></span></button>
+								<button type="submit" class="btn btn-link">
+									<span class="oi oi-trash"></span>
+								</button>
 							</form>
 						</td>
 					</tr>
