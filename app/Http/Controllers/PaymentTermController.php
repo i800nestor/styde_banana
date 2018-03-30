@@ -87,6 +87,17 @@ class PaymentTermController extends Controller
         return redirect()->route('payment_terms.index');
     }
 
+    public function archived(PaymentTerm $payment_term)
+    {
+        $data = request()->validate([
+            'archived' => 'required'
+        ]);
+
+        $payment_term->update($data);
+
+        return redirect()->route('payment_terms.index');
+    }
+
     public function destroy(PaymentTerm $payment_term)
     {
 

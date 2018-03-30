@@ -109,6 +109,10 @@ Route::get('payment_terms/{payment_term}/edit', 'PaymentTermController@edit')
 Route::put('/payment_terms/{payment_term}', 'PaymentTermController@update')
 	->name('payment_terms.update');
 
+
+Route::put('payment_terms/{payment_term}/archived', 'PaymentTermController@archived')
+	->name('payment_terms.archived');
+
 Route::delete('/payment_terms/{payment_term}', 'PaymentTermController@destroy')
 	->name('payment_terms.delete');
 

@@ -110,6 +110,26 @@ class PaymentTermsTest extends TestCase
     }
 
     /** @test */
+    public function itArchivedPaymentTerm()
+    {
+        //$this->withoutExceptionHandling();
+
+        $payment_term = PaymentTerm::create([
+            'name' => 'unique pay 30D',
+            'notes' => 'Pay unique in 30 days'
+        ]);
+
+        $this->put("payment_terms/{$payment_term->id}/archived", [
+            'archived' => 1
+        ])->assertRedirect( route('payment_terms.index') );
+
+        $this->assertDatabaseHas('payment_terms',[
+            'archived' => 1
+        ]);
+
+    }
+
+    /** @test */
     public function itDeletePaymentTerm()
     {
         $this->withoutExceptionHandling();

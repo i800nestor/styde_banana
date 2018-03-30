@@ -17,6 +17,7 @@ class CreatePaymenttermsTable extends Migration
             $table->increments('id');
             $table->string('name', 45);
             $table->text('notes')->nullable();
+            $table->boolean('archived')->default(0);
             $table->timestamps();
         });
     }

@@ -45,6 +45,7 @@
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Name</th>
+					<th scope="col">Archived</th>
 					<th scope="col">Action</th>
 				</tr>
 		  	</thead>
@@ -55,7 +56,18 @@
 					<tr>
 						<th scope="row">{{ $payment_term->id }}</th>
 						<td>{{ $payment_term->name }}</td>
+						<td>{{ $payment_term->archived }}</td>
 						<td>
+							<form action="{{ route('payment_terms.archived', $payment_term) }}" method="POST">
+								{{ csrf_field() }}
+								{{ method_field('PUT') }}
+								<input type="hidden" name="archived" id="archived" value=<?php
+									$archived = ( $payment_term->archived == 0 ) ? 1 : 0;
+									echo $archived;
+								?>>
+
+								<button type="submit" class="btn btn-link">archived</button>
+							</form>
 							<a href="{{ route('payment_terms.show', $payment_term) }}">
 								See details
 							</a>
