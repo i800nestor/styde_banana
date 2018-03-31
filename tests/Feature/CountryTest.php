@@ -37,20 +37,6 @@ class CountryTest extends TestCase
     }
 
     /** @test */
-    function itLoadsTheCountryDetailsPage(){
-
-        //User::truncate();
-        $country = country::create([
-        	'iso' => 've',
-        	'country' => 'venezuela'
-        ]);
-
-        $this->get("/countries/{$country->id}")
-            ->assertStatus(200)
-            ->assertSee('venezuela');
-    }
-
-    /** @test */
     public function itLoadstheNewCountryPage()
     {
         $this->get('countries/new')

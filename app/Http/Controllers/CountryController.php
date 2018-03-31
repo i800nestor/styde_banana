@@ -24,13 +24,6 @@ class CountryController extends Controller
     	));
     }
 
-    public function show(Country $country)
-    {
-
-    	return view('countries.show', compact('country'));
-
-    }
-
     public function new()
     {
     	
