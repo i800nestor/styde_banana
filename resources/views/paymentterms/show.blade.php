@@ -46,10 +46,10 @@
 						<td>{{ $term->typeid }}</td>
 						<td>{{ $term->typeem }}</td>
 						<td>{{ $term->typenm }}</td>
-						<td>{{ $term->daydxpp }}</td>
-						<td>{{ $term->percentdxpp }}</td>
+						<td>{{ number_format($term->daydxpp, 2, '.', ',')."%" }}</td>
+						<td>{{ number_format($term->percentagedxpp, 2, '.', ',')."%" }}</td>
 						<td>{{ number_format($term->fixed_amount, 2, '.', ',') }}</td>
-						<td>{{ $term->percentage }}%</td>
+						<td>{{ number_format($term->percentage, 2, '.', ',')."%" }}</td>
 						<td>
 							<form action="{{ url("term_types/{$term->id}") }}" method="POST">
 								{{ csrf_field() }}
