@@ -12,7 +12,17 @@ class TermTypeController extends Controller
 {
     public function new(PaymentTerm $payment_term)
     {
-        return view('termtypes.new', compact('payment_term'));
+        $term_type = TermType::where('payment_terms_id', '=', $payment_term->id)
+            ->where('type', '=', 'B')
+            ->first();
+
+        $flag = ($term_type) ? true : false;
+
+        if ($flag)
+            return redirect()->route('payment_terms.show', $payment_term->id);
+        else
+            return view('termtypes.new', compact('payment_term'));
+        
     }
 
     public function create()
