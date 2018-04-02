@@ -29,7 +29,7 @@ class TermTypeController extends Controller
             'day' => 'between:0,2|required_if:typev,typedays',
             'fixed_amount' => 'required_if:type,M|between:0,10',
             'percentage' => 'required_if:type,P|between:0,3',
-            'daydxpp' => "between:0,2",
+            'daydxpp' => "required_with:percentdxpp|between:0,2",
             'percentdxpp' => 'required_with:daydxpp|between:0,2'
         ],[
             'type.required' => 'The type is mandatory',
@@ -43,6 +43,7 @@ class TermTypeController extends Controller
             'percentage.required_if' => 'If I select the type "percentage", you must specify the percentage',
             'percentage.between' => 'The percentage should be between 0 to 100',
             'daydxpp.between' => 'The discount days must be between 0 and 99',
+            'daydxpp.required_with' => 'Indicate the discount percentage, indicate the discount days',
             'percentdxpp.required_with' => 'Indicate the discount days, indicate the discount percentage',
             'percentdxpp.between' => 'The discount percentage must be between 0 and 99'
         ]);
@@ -105,7 +106,7 @@ class TermTypeController extends Controller
             'day' => 'between:0,2|required_if:typev,typedays',
             'fixed_amount' => 'required_if:type,M|between:0,10',
             'percentage' => 'required_if:type,P|between:0,3',
-            'daydxpp' => "between:0,2",
+            'daydxpp' => "required_with:percentdxpp|between:0,2",
             'percentdxpp' => 'required_with:daydxpp|between:0,2'
         ],[
             'type.required' => 'The type is mandatory',
@@ -119,6 +120,7 @@ class TermTypeController extends Controller
             'percentage.required_if' => 'If I select the type "percentage", you must specify the percentage',
             'percentage.between' => 'The percentage should be between 0 to 100',
             'daydxpp.between' => 'The discount days must be between 0 and 99',
+            'daydxpp.required_with' => 'Indicate the discount percentage, indicate the discount days',
             'percentdxpp.required_with' => 'Indicate the discount days, indicate the discount percentage',
             'percentdxpp.between' => 'The discount percentage must be between 0 and 99'
         ]);
